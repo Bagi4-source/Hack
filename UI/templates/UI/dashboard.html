@@ -1,0 +1,341 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'UI/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <title>Обзор</title>
+    {% if request.COOKIES.hide_menu == "true" %}
+        <style>
+            .menu-btn-a {
+                transform: scale(-1, 1);
+            }
+
+            .sidebar li span {
+                display: none;
+            }
+
+            .logo > img {
+                height: 50px;
+            }
+
+            .link-img {
+                transform: scale(1.2);
+            }
+
+            .sidebar-container {
+                width: 86px;
+            }
+        </style>
+    {% endif %}
+</head>
+<body>
+<div class="dashboard row m-0">
+    <div class="p-0 m-0 sidebar-container">
+        <div class="sidebar">
+            <div class="logo w-100">
+                <img class="mx-auto" src="{% static 'UI/logo-no-background.png' %}" alt="" height="80">
+            </div>
+            <ul class="links nondec w-100 p-0">
+                <li class="link active-link w-100">
+                    <svg class="link-img" viewBox="-1 -1 18 18" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.5232 8.94116H8.54412L13.1921 13.5891C13.3697 13.7667 13.6621 13.7812 13.8447 13.6091C14.9829 12.5367 15.7659 11.0912 15.9956 9.46616C16.035 9.18793 15.8041 8.94116 15.5232 8.94116ZM15.0576 7.03528C14.8153 3.52176 12.0076 0.714119 8.49412 0.471767C8.22589 0.453237 8 0.679413 8 0.948236V7.5294H14.5815C14.8503 7.5294 15.0762 7.30352 15.0576 7.03528ZM6.58824 8.94116V1.96206C6.58824 1.68118 6.34147 1.45029 6.06353 1.48971C2.55853 1.985 -0.120585 5.04705 0.00412089 8.71675C0.132356 12.4856 3.37736 15.5761 7.14794 15.5288C8.6303 15.5103 10 15.0326 11.1262 14.2338C11.3585 14.0691 11.3738 13.727 11.1724 13.5256L6.58824 8.94116Z"/>
+                    </svg>
+                    <span>Обзор</span>
+                </li>
+                <li class="link w-100">
+                    <svg class="link-img" xmlns="http://www.w3.org/2000/svg" version="1.0"
+                         viewBox="5 5 80.000000 80.000000" preserveAspectRatio="xMidYMid meet">
+
+                        <g transform="translate(0.000000,90.000000) scale(0.100000,-0.100000)"
+                           stroke="none">
+                            <path d="M170 760 c-19 -19 -20 -33 -20 -250 0 -217 1 -231 20 -250 11 -11 24 -20 29 -20 6 0 11 85 13 205 l3 205 33 32 32 33 175 3 c100 2 175 7 175 13 0 5 -9 18 -20 29 -19 19 -33 20 -220 20 -187 0 -201 -1 -220 -20z"/>
+                            <path d="M290 640 c-19 -19 -20 -33 -20 -250 0 -217 1 -231 20 -250 19 -19 33 -20 220 -20 187 0 201 1 220 20 19 19 20 33 20 250 0 217 -1 231 -20 250 -19 19 -33 20 -220 20 -187 0 -201 -1 -220 -20z m365 -130 l0 -25 -143 -3 c-120 -2 -143 0 -148 13 -4 8 -4 22 0 30 5 13 28 15 148 13 l143 -3 0 -25z m0 -120 l0 -25 -143 -3 c-120 -2 -143 0 -148 13 -4 8 -4 22 0 30 5 13 28 15 148 13 l143 -3 0 -25z m0 -120 l0 -25 -143 -3 c-120 -2 -143 0 -148 13 -4 8 -4 22 0 30 5 13 28 15 148 13 l143 -3 0 -25z"/>
+                        </g>
+                    </svg>
+                    <span>Документы</span>
+                </li>
+            </ul>
+            <hr class="sidebar-line">
+            <ul class="links nondec w-100 p-0">
+                <li class="link w-100">
+                    <svg class="link-img" viewBox="-1 -1 18 18" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.2313 9.86557L13.9 9.09682C14.0344 8.37182 14.0344 7.62807 13.9 6.90307L15.2313 6.13432C15.3844 6.04682 15.4531 5.86557 15.4031 5.69682C15.0563 4.58432 14.4656 3.57807 13.6938 2.74057C13.575 2.61244 13.3813 2.58119 13.2313 2.66869L11.9 3.43744C11.3406 2.95619 10.6969 2.58432 10 2.34057V0.806191C10 0.631191 9.87814 0.478066 9.70627 0.440566C8.55939 0.184316 7.38439 0.196816 6.29377 0.440566C6.12189 0.478066 6.00002 0.631191 6.00002 0.806191V2.34369C5.30627 2.59057 4.66252 2.96244 4.10002 3.44057L2.77189 2.67182C2.61877 2.58432 2.42814 2.61244 2.30939 2.74369C1.53752 3.57807 0.946895 4.58432 0.60002 5.69994C0.546895 5.86869 0.61877 6.04994 0.771895 6.13744L2.10314 6.90619C1.96877 7.63119 1.96877 8.37494 2.10314 9.09994L0.771895 9.86869C0.61877 9.95619 0.55002 10.1374 0.60002 10.3062C0.946895 11.4187 1.53752 12.4249 2.30939 13.2624C2.42814 13.3906 2.62189 13.4218 2.77189 13.3343L4.10314 12.5656C4.66252 13.0468 5.30627 13.4187 6.00314 13.6624V15.1999C6.00314 15.3749 6.12502 15.5281 6.29689 15.5656C7.44377 15.8218 8.61877 15.8093 9.70939 15.5656C9.88127 15.5281 10.0031 15.3749 10.0031 15.1999V13.6624C10.6969 13.4156 11.3406 13.0437 11.9031 12.5656L13.2344 13.3343C13.3875 13.4218 13.5781 13.3937 13.6969 13.2624C14.4688 12.4281 15.0594 11.4218 15.4063 10.3062C15.4531 10.1343 15.3844 9.95307 15.2313 9.86557ZM8.00002 10.4999C6.62189 10.4999 5.50002 9.37807 5.50002 7.99994C5.50002 6.62182 6.62189 5.49994 8.00002 5.49994C9.37814 5.49994 10.5 6.62182 10.5 7.99994C10.5 9.37807 9.37814 10.4999 8.00002 10.4999Z"/>
+                    </svg>
+                    <span>Настройки</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="menu-btn my-auto">
+        <a class="menu-btn-a" type="button"
+           onclick="{% if request.COOKIES.hide_menu == "true" %}show_menu(){% else %}hide_menu(){% endif %}"
+           style="cursor: pointer">
+            <svg width="16" height="25" viewBox="0 0 43 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M29.0667 1.52452C27.8667 2.45785 20.9333 12.4579 13.4667 23.5245C3.73333 38.1912 0 44.9912 0 47.9245C0 50.8579 3.73333 57.6579 13.4667 72.3245C20.9333 83.3912 27.8667 93.3912 29.0667 94.1912C34.2667 98.3245 42.6667 93.9245 42.6667 87.2579C42.6667 85.2579 37.8667 76.7245 30.6667 65.9245L18.6667 47.9245L30.6667 29.9245C37.8667 19.1245 42.6667 10.5912 42.6667 8.59119C42.6667 1.92452 34.2667 -2.47548 29.0667 1.52452Z"
+                      fill="black"/>
+            </svg>
+        </a>
+    </div>
+    <div class="col p-0 m-0">
+        <div class="content">
+            <div class="content-header row m-0">
+                <div class="page-name">
+                    <span>Обзор</span>
+                </div>
+                <div class="controls">
+                    <div class="control-btns">
+                        <a class="notifications" onclick="show_notifications()">
+                            <svg class="controls-img" style="transform: scale(1.4);" width="18" height="19"
+                                 viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.99999 19C9.10374 19 9.99905 18.1047 9.99905 17H6.00093C6.00093 18.1047 6.89624 19 7.99999 19ZM14.7309 14.3216C14.1272 13.6728 12.9975 12.6969 12.9975 9.5C12.9975 7.07188 11.295 5.12812 8.99937 4.65125V4C8.99937 3.44781 8.55187 3 7.99999 3C7.44812 3 7.00062 3.44781 7.00062 4V4.65125C4.70499 5.12812 3.00249 7.07188 3.00249 9.5C3.00249 12.6969 1.8728 13.6728 1.26905 14.3216C1.08155 14.5231 0.998429 14.7641 0.999991 15C1.00343 15.5125 1.40562 16 2.00312 16H13.9969C14.5944 16 14.9969 15.5125 15 15C15.0016 14.7641 14.9184 14.5228 14.7309 14.3216Z"/>
+                                {% if user.has_notifications %}
+                                    <circle cx="13" cy="5" r="3.75" fill="#3751FF" stroke="#F7F8FC" stroke-width="1.5"/>
+                                {% endif %}
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="vl mx-4" style="height: 40px;"></div>
+                    <div class="profile">
+                        <span class="profile-name">{{ user }}</span>
+                        <img class="profile-pic" src="https://www.w3schools.com/howto/img_avatar.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="stats row m-0">
+                <div class="cell stat-cell stat-cell-active col info-block">
+                    <div class="stat-cell-title" aria-label="garage">Автомобили</div>
+                    <div class="stat-cell-value">{{ user.garage.count }}</div>
+                </div>
+                <div class="cell stat-cell col info-block">
+                    <div class="stat-cell-title" aria-label="map">Станции</div>
+                    <div class="stat-cell-value">17</div>
+                </div>
+                <div class="cell stat-cell col info-block">
+                    <div class="stat-cell-title" aria-label="fine">Штрафы</div>
+                    <div class="stat-cell-value">{{ user.fine }} <span style="font-weight: 600">₽</span></div>
+                </div>
+                <div class="cell stat-cell col info-block">
+                    <div class="stat-cell-title" aria-label="requests">История запросов</div>
+                    <div class="stat-cell-value">{{ user.requests.count }}</div>
+                </div>
+                <div class="w-100"></div>
+                <div class="processing mx-auto my-2">
+                    <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="64px" height="64px"
+                         viewBox="0 0 128 128" xml:space="preserve"><g><circle cx="16" cy="64" r="16" fill="#000000"/><circle
+                            cx="16" cy="64" r="16" fill="#555555" transform="rotate(45,64,64)"/><circle cx="16" cy="64"
+                                                                                                        r="16"
+                                                                                                        fill="#949494"
+                                                                                                        transform="rotate(90,64,64)"/><circle
+                            cx="16" cy="64" r="16" fill="#cccccc" transform="rotate(135,64,64)"/><circle cx="16" cy="64"
+                                                                                                         r="16"
+                                                                                                         fill="#e1e1e1"
+                                                                                                         transform="rotate(180,64,64)"/><circle
+                            cx="16" cy="64" r="16" fill="#e1e1e1" transform="rotate(225,64,64)"/><circle cx="16" cy="64"
+                                                                                                         r="16"
+                                                                                                         fill="#e1e1e1"
+                                                                                                         transform="rotate(270,64,64)"/><circle
+                            cx="16" cy="64" r="16" fill="#e1e1e1" transform="rotate(315,64,64)"/><animateTransform
+                            attributeName="transform" type="rotate"
+                            values="0 64 64;315 64 64;270 64 64;225 64 64;180 64 64;135 64 64;90 64 64;45 64 64"
+                            calcMode="discrete" dur="720ms" repeatCount="indefinite"/></g></svg>
+                </div>
+                <div class="cell col stat-content info-block">
+                    <div class="item item-title">
+                        <div>#</div>
+                        <div class="col">Модель</div>
+                        <div class="col">Гос. номер</div>
+                        <div class="col">VIN</div>
+                        <div class="col">Управление</div>
+                        <div class="col">Дата регистрации</div>
+                    </div>
+                    {% for car in cars %}
+                        <div class="item">
+                            <div>{{ forloop.counter }}</div>
+                            <div class="col" aria-label="Модель">{{ car }}</div>
+                            <div class="col" aria-label="Гос. номер">{{ car.number }}</div>
+                            <div class="col" aria-label="VIN">{{ car.vin }}</div>
+                            <div class="col" aria-label="Управление">
+                                <a href="{% url 'car-info' car.pk %}">
+                                    <svg class="car-settings" xmlns="http://www.w3.org/2000/svg" version="1.0"
+                                         height="35"
+                                         viewBox="0 0 90.000000 90.000000" preserveAspectRatio="xMidYMid meet">
+
+                                        <g transform="translate(0.000000,90.000000) scale(0.100000,-0.100000)"
+                                           stroke="none">
+                                            <path d="M192 830 c-12 -5 -27 -22 -33 -36 -6 -17 -9 -150 -7 -360 3 -304 5 -335 21 -351 15 -16 41 -18 199 -21 l181 -3 99 99 99 99 -3 271 c-3 245 -5 273 -21 289 -16 16 -43 18 -265 20 -136 1 -257 -2 -270 -7z m108 -140 c0 -27 -3 -30 -30 -30 -27 0 -30 3 -30 30 0 27 3 30 30 30 27 0 30 -3 30 -30z m360 0 l0 -30 -150 0 -150 0 0 30 0 30 150 0 150 0 0 -30z m-360 -150 c0 -27 -3 -30 -30 -30 -27 0 -30 3 -30 30 0 27 3 30 30 30 27 0 30 -3 30 -30z m360 0 l0 -30 -150 0 -150 0 0 30 0 30 150 0 150 0 0 -30z m-360 -150 c0 -27 -3 -30 -30 -30 -27 0 -30 3 -30 30 0 27 3 30 30 30 27 0 30 -3 30 -30z m360 0 l0 -30 -150 0 -150 0 0 30 0 30 150 0 150 0 0 -30z m-360 -150 c0 -27 -3 -30 -30 -30 -27 0 -30 3 -30 30 0 27 3 30 30 30 27 0 30 -3 30 -30z m180 0 l0 -30 -60 0 -60 0 0 30 0 30 60 0 60 0 0 -30z m220 27 c0 -1 -36 -38 -80 -82 l-80 -80 0 83 0 82 80 0 c44 0 80 -1 80 -3z"/>
+                                        </g>
+                                    </svg>
+                                </a>
+                                <a href="{% url 'car-setting' car.pk %}">
+                                    <svg class="car-settings" viewBox="-1 -1 18 18" height="35"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15.2313 9.86557L13.9 9.09682C14.0344 8.37182 14.0344 7.62807 13.9 6.90307L15.2313 6.13432C15.3844 6.04682 15.4531 5.86557 15.4031 5.69682C15.0563 4.58432 14.4656 3.57807 13.6938 2.74057C13.575 2.61244 13.3813 2.58119 13.2313 2.66869L11.9 3.43744C11.3406 2.95619 10.6969 2.58432 10 2.34057V0.806191C10 0.631191 9.87814 0.478066 9.70627 0.440566C8.55939 0.184316 7.38439 0.196816 6.29377 0.440566C6.12189 0.478066 6.00002 0.631191 6.00002 0.806191V2.34369C5.30627 2.59057 4.66252 2.96244 4.10002 3.44057L2.77189 2.67182C2.61877 2.58432 2.42814 2.61244 2.30939 2.74369C1.53752 3.57807 0.946895 4.58432 0.60002 5.69994C0.546895 5.86869 0.61877 6.04994 0.771895 6.13744L2.10314 6.90619C1.96877 7.63119 1.96877 8.37494 2.10314 9.09994L0.771895 9.86869C0.61877 9.95619 0.55002 10.1374 0.60002 10.3062C0.946895 11.4187 1.53752 12.4249 2.30939 13.2624C2.42814 13.3906 2.62189 13.4218 2.77189 13.3343L4.10314 12.5656C4.66252 13.0468 5.30627 13.4187 6.00314 13.6624V15.1999C6.00314 15.3749 6.12502 15.5281 6.29689 15.5656C7.44377 15.8218 8.61877 15.8093 9.70939 15.5656C9.88127 15.5281 10.0031 15.3749 10.0031 15.1999V13.6624C10.6969 13.4156 11.3406 13.0437 11.9031 12.5656L13.2344 13.3343C13.3875 13.4218 13.5781 13.3937 13.6969 13.2624C14.4688 12.4281 15.0594 11.4218 15.4063 10.3062C15.4531 10.1343 15.3844 9.95307 15.2313 9.86557ZM8.00002 10.4999C6.62189 10.4999 5.50002 9.37807 5.50002 7.99994C5.50002 6.62182 6.62189 5.49994 8.00002 5.49994C9.37814 5.49994 10.5 6.62182 10.5 7.99994C10.5 9.37807 9.37814 10.4999 8.00002 10.4999Z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="col"
+                                 aria-label="Дата регистрации">{{ car.creation_date | date:"d-m-Y G:i" }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="notification-bar">
+        <div class="notification-header">
+            <span>Уведомления</span>
+            <svg onclick="hide_notifications()" xmlns="http://www.w3.org/2000/svg"
+                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+                 x="0px" y="0px" width="20" height="20" viewBox="0 0 612.043 612.043"
+                 style="enable-background:new 0 0 612.043 612.043;" xml:space="preserve">
+                <g id="cross">
+                    <g>
+                        <path d="M397.503,306.011l195.577-195.577c25.27-25.269,25.27-66.213,0-91.482c-25.269-25.269-66.213-25.269-91.481,0     L306.022,214.551L110.445,18.974c-25.269-25.269-66.213-25.269-91.482,0s-25.269,66.213,0,91.482L214.54,306.033L18.963,501.61     c-25.269,25.269-25.269,66.213,0,91.481c25.269,25.27,66.213,25.27,91.482,0l195.577-195.576l195.577,195.576     c25.269,25.27,66.213,25.27,91.481,0c25.27-25.269,25.27-66.213,0-91.481L397.503,306.011z"/>
+                    </g>
+                </g>
+
+            </svg>
+        </div>
+        <div class="notification">
+            1
+        </div>
+        <div class="notification">
+            1
+        </div>
+        <div class="notification">
+            1
+        </div>
+    </div>
+</div>
+
+
+<script src="{% static 'UI/jquery-3.6.1.min.js' %}"></script>
+
+<script src="{% static 'UI/highcharts.js' %}"></script>
+<script src="{% static 'UI/data.js' %}"></script>
+<script src="{% static 'UI/exporting.js' %}"></script>
+<script src="{% static 'UI/export-data.js' %}"></script>
+<script src="{% static 'UI/accessibility.js' %}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="{% static 'UI/jquery-ui.min.js' %}"></script>
+
+<script>
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график'
+        }
+    });
+</script>
+<script>
+    function show_notifications() {
+        $('.notification-bar').css("display", "flex")
+        $('.notifications').attr("onclick", "hide_notifications()");
+    }
+
+    function hide_notifications() {
+        $('.notifications').attr("onclick", "show_notifications()");
+        $('.notification-bar').css("display", "none");
+    }
+
+    function hide_menu() {
+        $('.menu-btn-a').attr("onclick", "show_menu()").css("transform", "scale(-1, 1)");
+        document.querySelectorAll(".sidebar li span").forEach(element => $(element).hide("slide", {
+            direction: "left",
+            distance: '300%'
+        }, 150));
+        document.querySelectorAll(".logo > img").forEach(element => $(element).css("height", "50px"));
+        document.querySelectorAll(".link-img").forEach(element => $(element).css("transform", "scale(1.2)"));
+        $('.sidebar').parent().animate({
+            width: "86px"
+        }, 500);
+
+        document.cookie = "hide_menu=true";
+    }
+
+    function show_menu() {
+        $('.menu-btn-a').attr("onclick", "hide_menu()").css("transform", "scale(1, 1)");
+        document.querySelectorAll(".sidebar li span").forEach(element => $(element).delay(120).show("slide", {
+            direction: "left",
+            distance: '0%'
+        }, 500));
+        document.querySelectorAll(".logo > img").forEach(element => $(element).css("height", "80px"));
+        document.querySelectorAll(".link-img").forEach(element => $(element).css("transform", "scale(1)"));
+        $('.sidebar').parent().animate({
+            width: "20%"
+        }, 500);
+
+        document.cookie = "hide_menu=false";
+    }
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + "=")) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    $('.stat-cell').each(function () {
+        $(this).click(function () {
+            $('.stat-cell-active').removeClass('stat-cell-active');
+            $('.stat-content').hide();
+            $('.processing').show();
+            $(this).addClass('stat-cell-active');
+            $.ajax({
+                url: {% url 'stat-cells' %},
+                method: "POST",
+                dataType: "json",
+                data: {'aria-label': $(this).children('div.stat-cell-title').attr('aria-label')},
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                success: (json) => {
+                    $('.processing').hide();
+                    $('.stat-content').html(json['data'])
+                    $('.stat-content').show();
+                },
+                error: (error) => {
+                    $('.processing').hide();
+                    // $('.stat-content').css('display', 'flex');
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

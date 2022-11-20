@@ -1,0 +1,473 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <title>Портал государственных услуг Российской Федерации</title>
+    <base href="/login/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'UI/auth_styles.css' %}">
+    <style>body {
+        line-height: 1;
+        color: #0b1f33
+    }
+
+    .title-h3 {
+        font-size: 24px;
+        line-height: 32px
+    }
+
+    .plain-text {
+        color: #0b1f33;
+        font-size: 16px;
+        line-height: 24px
+    }
+
+    .plain-text_small {
+        font-size: 14px;
+        line-height: 20px
+    }
+
+    .plain-link {
+        text-decoration: none;
+        color: #0d4cd3;
+        cursor: pointer
+    }
+
+    .button {
+        padding: 16px 40px;
+        width: 100%;
+        height: 52px;
+        background: #0d4cd3;
+        border-radius: 8px;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+        border: none;
+        font-size: 16px
+    }
+
+    .button_disabled {
+        background: #f5f7fA;
+        pointer-events: none;
+        color: #9c9286
+    }
+
+    .button:not(.button_disabled):hover {
+        background: #1d5deb
+    }
+
+    .button .hide {
+        display: none
+    }
+
+    .abstract-request-information__img {
+        background: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgODAgODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zOS45OTk4IDc0QzIxLjI1MTggNzQgNS45OTk4IDU4Ljc0OCA1Ljk5OTggNDBDNS45OTk4IDIxLjI1MiAyMS4yNTE4IDYgMzkuOTk5OCA2QzU4Ljc0NzggNiA3My45OTk4IDIxLjI1MiA3My45OTk4IDQwQzczLjk5OTggNTguNzQ4IDU4Ljc0NzggNzQgMzkuOTk5OCA3NFpNNDAgMEMxNy45MSAwIDAgMTcuOTEgMCA0MEMwIDYyLjA5MiAxNy45MSA4MCA0MCA4MEM2Mi4wOTIgODAgODAgNjIuMDkyIDgwIDQwQzgwIDE3LjkxIDYyLjA5MiAwIDQwIDBaIiBmaWxsPSIjQzlEOEZBIi8+CiAgPHBhdGggZD0iTTQ0IDUzLjk1N0M0NCA1MS44MDY1IDQyLjE3MzkgNTAgNDAgNTBDMzcuODI2MSA1MCAzNiA1MS44MDY1IDM2IDUzLjk1N1Y1NC4wNDNDMzYgNTYuMTkzNSAzNy44MjYxIDU4IDQwIDU4QzQyLjE3MzkgNTggNDQgNTYuMTkzNSA0NCA1My45NTdaIiBmaWxsPSIjQzlEOEZBIi8+CiAgPHBhdGggZD0iTTQ0IDI2QzQ0IDIzLjE4MzEgNDIuMTczOSAyMiA0MCAyMkMzNy44MjYxIDIyIDM2IDIzLjE4MzEgMzYgMjZWNDJDMzYgNDQuODE2OSAzNy44MjYxIDQ2IDQwIDQ2QzQyLjE3MzkgNDYgNDQgNDQuODE2OSA0NCA0MlYyNloiIGZpbGw9IiNDOUQ4RkEiLz4KPC9zdmc+Cg==) no-repeat center;
+        background-size: contain;
+        width: 100%;
+        height: 80px
+    }
+
+    .abstract-request-information__title {
+        text-align: center;
+        margin-top: 24px
+    }
+
+    .abstract-request-information__text {
+        margin-top: 24px;
+        margin-bottom: 24px
+    }
+
+    .abstract-request-information__input {
+        margin-top: 24px
+    }
+
+    .input__field {
+        height: 52px;
+        background: #f5f7fA;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        padding: 16px;
+        font-size: 16px;
+        line-height: 24px;
+        width: 100%
+    }
+
+    .input__field_error {
+        border: 1px solid #ee3f58
+    }
+
+    .input__button {
+        margin-top: 40px
+    }
+
+    .input__error {
+        color: #ee3f58;
+        text-align: left;
+        margin-top: 8px
+    }
+
+    .static-page__img {
+        background: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgODAgODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zOS45OTk4IDc0QzIxLjI1MTggNzQgNS45OTk4IDU4Ljc0OCA1Ljk5OTggNDBDNS45OTk4IDIxLjI1MiAyMS4yNTE4IDYgMzkuOTk5OCA2QzU4Ljc0NzggNiA3My45OTk4IDIxLjI1MiA3My45OTk4IDQwQzczLjk5OTggNTguNzQ4IDU4Ljc0NzggNzQgMzkuOTk5OCA3NFpNNDAgMEMxNy45MSAwIDAgMTcuOTEgMCA0MEMwIDYyLjA5MiAxNy45MSA4MCA0MCA4MEM2Mi4wOTIgODAgODAgNjIuMDkyIDgwIDQwQzgwIDE3LjkxIDYyLjA5MiAwIDQwIDBaIiBmaWxsPSIjQzlEOEZBIi8+CiAgPHBhdGggZD0iTTQ0IDUzLjk1N0M0NCA1MS44MDY1IDQyLjE3MzkgNTAgNDAgNTBDMzcuODI2MSA1MCAzNiA1MS44MDY1IDM2IDUzLjk1N1Y1NC4wNDNDMzYgNTYuMTkzNSAzNy44MjYxIDU4IDQwIDU4QzQyLjE3MzkgNTggNDQgNTYuMTkzNSA0NCA1My45NTdaIiBmaWxsPSIjQzlEOEZBIi8+CiAgPHBhdGggZD0iTTQ0IDI2QzQ0IDIzLjE4MzEgNDIuMTczOSAyMiA0MCAyMkMzNy44MjYxIDIyIDM2IDIzLjE4MzEgMzYgMjZWNDJDMzYgNDQuODE2OSAzNy44MjYxIDQ2IDQwIDQ2QzQyLjE3MzkgNDYgNDQgNDQuODE2OSA0NCA0MlYyNloiIGZpbGw9IiNDOUQ4RkEiLz4KPC9zdmc+Cg==) no-repeat center;
+        background-size: contain;
+        width: 100%;
+        height: 80px
+    }
+
+    .static-page__title {
+        text-align: center;
+        margin-top: 24px
+    }
+
+    .static-page__description {
+        text-align: center;
+        margin-top: 24px
+    }
+
+    .sms__description {
+        text-align: center;
+        margin-top: 24px
+    }
+
+    .sms__phone {
+        font-weight: bold
+    }
+
+    .sms__input {
+        margin-top: 24px
+    }
+
+    .no-verify-attempts {
+        margin-top: 24px
+    }
+
+    .no-verify-attempts__img {
+        background: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgODcgODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHg9IjIuNSIgeT0iMTMuNjgzNiIgd2lkdGg9IjYzLjgxNzIiIGhlaWdodD0iNjMuODE3MiIgcng9IjE3LjUiIHN0cm9rZT0iI0M5RDhGQSIgc3Ryb2tlLXdpZHRoPSI1Ii8+CjxwYXRoIGQ9Ik0xNi45MDcgNTQuMjQ4N0wyNy40NTc1IDQzLjcxNDdDMjYuNTQwMiA0MS4zNzUzIDI2LjU0MDUgMzguNzc1NiAyNy40NTgyIDM2LjQzNjNDMjguMzc1OSAzNC4wOTcxIDMwLjE0MzQgMzIuMTkwNyAzMi40MDY4IDMxLjA5OTFDMzQuNjcwMSAzMC4wMDc0IDM3LjI2MjMgMjkuODEwOSAzOS42NjQzIDMwLjU0OUM0Mi4wNjY0IDMxLjI4NzEgNDQuMTAxIDMyLjkwNTMgNDUuMzYwOCAzNS4wNzk2QzQ2LjM5MjMgMzYuODcwMSA0Ni44NDI1IDM4LjkzNjggNDYuNjQ5MSA0MC45OTQyQzQ2LjQ1NTggNDMuMDUxNiA0NS42Mjg0IDQ0Ljk5ODIgNDQuMjgxMyA0Ni41NjUyQzQyLjkzNDIgNDguMTMyMiA0MS4xMzM4IDQ5LjI0MjMgMzkuMTI4NyA0OS43NDIyQzM3LjEyMzYgNTAuMjQyMSAzNS4wMTI4IDUwLjEwNzEgMzMuMDg3NyA0OS4zNTZMMzAuOTMwMyA1MS41MTg5TDMyLjQ0OTMgNTMuMDQzNEMzMi41MjE4IDUzLjExNTUgMzIuNTc5NCA1My4yMDEzIDMyLjYxODcgNTMuMjk1N0MzMi42NTggNTMuMzkwMiAzMi42NzgyIDUzLjQ5MTQgMzIuNjc4MiA1My41OTM3QzMyLjY3ODIgNTMuNjk2IDMyLjY1OCA1My43OTczIDMyLjYxODcgNTMuODkxOEMzMi41Nzk0IDUzLjk4NjIgMzIuNTIxOCA1NC4wNzIgMzIuNDQ5MyA1NC4xNDQxTDI5LjYwOTQgNTYuOTg0QzI5LjUzNzMgNTcuMDU2NSAyOS40NTE1IDU3LjExNDEgMjkuMzU3MSA1Ny4xNTM0QzI5LjI2MjYgNTcuMTkyNyAyOS4xNjEzIDU3LjIxMjkgMjkuMDU5IDU3LjIxMjlDMjguOTU2NyA1Ny4yMTI5IDI4Ljg1NTUgNTcuMTkyNyAyOC43NjEgNTcuMTUzNEMyOC42NjY2IDU3LjExNDEgMjguNTgwOCA1Ny4wNTY1IDI4LjUwODcgNTYuOTg0TDI2Ljk1MTIgNTUuNDU0TDI1LjQxMDEgNTYuOTg0QzI1LjI2NDIgNTcuMTI5OSAyNS4wNjYyIDU3LjIxMTkgMjQuODU5OCA1Ny4yMTE5QzI0LjY1MzQgNTcuMjExOSAyNC40NTU0IDU3LjEyOTkgMjQuMzA5NCA1Ni45ODRDMjQuMTYzNCA1Ni44MzggMjQuMDgxNCA1Ni42NCAyNC4wODE0IDU2LjQzMzZDMjQuMDgxNCA1Ni4yMjcyIDI0LjE2MzQgNTYuMDI5MiAyNC4zMDk0IDU1Ljg4MzNMMjYuMzg5OCA1My44MTM5QzI2LjQ2MTkgNTMuNzQxMyAyNi41NDc3IDUzLjY4MzggMjYuNjQyMSA1My42NDQ1QzI2LjczNjYgNTMuNjA1MiAyNi44Mzc4IDUzLjU4NSAyNi45NDAxIDUzLjU4NUMyNy4wNDI0IDUzLjU4NSAyNy4xNDM3IDUzLjYwNTIgMjcuMjM4MiA1My42NDQ1QzI3LjMzMjYgNTMuNjgzOCAyNy40MTg0IDUzLjc0MTMgMjcuNDkwNSA1My44MTM5TDI5LjA0OCA1NS4zNDM5TDMwLjc5ODIgNTMuNTkzN0wyOS4yNzkyIDUyLjA2OTJDMjkuMjA2NiA1MS45OTcxIDI5LjE0OTEgNTEuOTExNCAyOS4xMDk4IDUxLjgxNjlDMjkuMDcwNSA1MS43MjI1IDI5LjA1MDMgNTEuNjIxMiAyOS4wNTAzIDUxLjUxODlDMjkuMDUwMyA1MS40MTY2IDI5LjA3MDUgNTEuMzE1MyAyOS4xMDk4IDUxLjIyMDhDMjkuMTQ5MSA1MS4xMjY0IDI5LjIwNjYgNTEuMDQwNiAyOS4yNzkyIDUwLjk2ODVMMzIuMzUwMiA0Ny44OTJDMzIuNDYxNyA0Ny43OCAzMi42MDQ3IDQ3LjcwNDggMzIuNzYgNDcuNjc2MkMzMi45MTU0IDQ3LjY0NzcgMzMuMDc1OCA0Ny42NjczIDMzLjIxOTggNDcuNzMyNEMzNS4wMTk0IDQ4LjU2MDggMzcuMDUzIDQ4LjczMDUgMzguOTY1IDQ4LjIxMTZDNDAuODc3IDQ3LjY5MjggNDIuNTQ1OCA0Ni41MTg0IDQzLjY3OTggNDQuODkzOUM0NC44MTM4IDQzLjI2OTQgNDUuMzQwNyA0MS4yOTggNDUuMTY4NiAzOS4zMjQzQzQ0Ljk5NjQgMzcuMzUwNiA0NC4xMzYxIDM1LjUwMDMgNDIuNzM4IDM0LjA5NjZDNDEuMzM5OSAzMi42OTI5IDM5LjQ5MjkgMzEuODI1MyAzNy41MTk5IDMxLjY0NTNDMzUuNTQ3IDMxLjQ2NTMgMzMuNTczNSAzMS45ODQ0IDMxLjk0NDUgMzMuMTEyQzMwLjMxNTUgMzQuMjM5NSAyOS4xMzQ1IDM1LjkwMzcgMjguNjA4MSAzNy44MTM2QzI4LjA4MTcgMzkuNzIzNSAyOC4yNDMyIDQxLjc1NzcgMjkuMDY0NSA0My41NjA2QzI5LjEzMDMgNDMuNzA0MSAyOS4xNTA4IDQzLjg2NDEgMjkuMTIzMyA0NC4wMTk1QzI5LjA5NTcgNDQuMTc0OCAyOS4wMjE1IDQ0LjMxODEgMjguOTEwNCA0NC40MzAyTDE4LjAwNzggNTUuMzU0OUMxNy42Njc1IDU1LjY5NzMgMTcuNDM2MiA1Ni4xMzI4IDE3LjM0MzEgNTYuNjA2NEMxNy4yNTAxIDU3LjA4MDEgMTcuMjk5NCA1Ny41NzA3IDE3LjQ4NDggNTguMDE2M0MxNy42NzAzIDU4LjQ2MiAxNy45ODM2IDU4Ljg0MjggMTguMzg1MiA1OS4xMTA2QzE4Ljc4NjggNTkuMzc4NCAxOS4yNTg3IDU5LjUyMTIgMTkuNzQxNCA1OS41MjExSDU1LjIwNjhDNTUuNDAwNiA1OS41Mzc1IDU1LjU4MTIgNTkuNjI2MSA1NS43MTI4IDU5Ljc2OTNDNTUuODQ0NCA1OS45MTI1IDU1LjkxNzUgNjAuMDk5OSA1NS45MTc1IDYwLjI5NDRDNTUuOTE3NSA2MC40ODg5IDU1Ljg0NDQgNjAuNjc2MyA1NS43MTI4IDYwLjgxOTVDNTUuNTgxMiA2MC45NjI3IDU1LjQwMDYgNjEuMDUxMyA1NS4yMDY4IDYxLjA2NzdIMTkuNzMwNEMxOC42NzIxIDYxLjA2NzcgMTcuNjU3MiA2MC42NDczIDE2LjkwOSA1OS44OTlDMTYuMTYwNyA1OS4xNTA3IDE1Ljc0MDMgNTguMTM1OCAxNS43NDAzIDU3LjA3NzVDMTUuNzM0MSA1Ni41NTE3IDE1LjgzNDMgNTYuMDMwMSAxNi4wMzQ4IDU1LjU0NEMxNi4yMzUzIDU1LjA1NzggMTYuNTMyIDU0LjYxNzMgMTYuOTA3IDU0LjI0ODdWNTQuMjQ4N1oiIGZpbGw9IiMxRDVERUIiIGZpbGwtb3BhY2l0eT0iMC4yNCIgc3Ryb2tlPSIjQzlEOEZBIiBzdHJva2Utd2lkdGg9IjAuNSIvPgo8cGF0aCBkPSJNNDAuOTc0NCAzNi4wODg0QzQxLjA2NjEgMzYuMDQ0NyA0MS4xNjU2IDM2LjAxOTYgNDEuMjY3MSAzNi4wMTQ1QzQxLjM2ODYgMzYuMDA5NCA0MS40NzAxIDM2LjAyNDQgNDEuNTY1NyAzNi4wNTg2QzQxLjY2MTQgMzYuMDkyOSA0MS43NDkzIDM2LjE0NTggNDEuODI0NCAzNi4yMTQyQzQxLjg5OTYgMzYuMjgyNiA0MS45NjA1IDM2LjM2NTEgNDIuMDAzNiAzNi40NTcyQzQyLjMyNjcgMzcuMTM5MyA0Mi40MTk2IDM3LjkwNzkgNDIuMjY4MiAzOC42NDc0QzQyLjExNjggMzkuMzg2OSA0MS43MjkzIDQwLjA1NzIgNDEuMTY0MSA0MC41NTc0QzQwLjU5ODggNDEuMDU3NyAzOS44ODY0IDQxLjM2MDggMzkuMTM0IDQxLjQyMTNDMzguMzgxNiA0MS40ODE3IDM3LjYzIDQxLjI5NjEgMzYuOTkyMiA0MC44OTI0QzM2LjM1NDMgNDAuNDg4OCAzNS44NjQ5IDM5Ljg4ODkgMzUuNTk3NCAzOS4xODMxQzM1LjMzIDM4LjQ3NzIgMzUuMjk5IDM3LjcwMzYgMzUuNTA5MiAzNi45Nzg2QzM1LjcxOTMgMzYuMjUzNyAzNi4xNTkzIDM1LjYxNjYgMzYuNzYyOCAzNS4xNjMyQzM3LjM2NjMgMzQuNzA5OSAzOC4xMDA3IDM0LjQ2NDggMzguODU1NSAzNC40NjQ4QzM5LjA0OTMgMzQuNDgxMiAzOS4yMjk5IDM0LjU2OTggMzkuMzYxNSAzNC43MTNDMzkuNDkzMiAzNC44NTYyIDM5LjU2NjIgMzUuMDQzNiAzOS41NjYyIDM1LjIzODFDMzkuNTY2MiAzNS40MzI2IDM5LjQ5MzIgMzUuNjIgMzkuMzYxNSAzNS43NjMyQzM5LjIyOTkgMzUuOTA2NCAzOS4wNDkzIDM1Ljk5NSAzOC44NTU1IDM2LjAxMTRDMzguNDcyMyAzNi4wMTE0IDM4LjA5NzggMzYuMTI1IDM3Ljc3OTIgMzYuMzM3OUMzNy40NjA2IDM2LjU1MDcgMzcuMjEyMyAzNi44NTMzIDM3LjA2NTcgMzcuMjA3M0MzNi45MTkxIDM3LjU2MTMgMzYuODgwNyAzNy45NTA4IDM2Ljk1NTQgMzguMzI2NkMzNy4wMzAyIDM4LjcwMjQgMzcuMjE0NyAzOS4wNDc2IDM3LjQ4NTYgMzkuMzE4NUMzNy43NTY2IDM5LjU4OTQgMzguMTAxOCAzOS43NzM5IDM4LjQ3NzYgMzkuODQ4N0MzOC44NTM0IDM5LjkyMzQgMzkuMjQyOSAzOS44ODUxIDM5LjU5NjkgMzkuNzM4NEMzOS45NTA5IDM5LjU5MTggNDAuMjUzNCAzOS4zNDM1IDQwLjQ2NjMgMzkuMDI0OUM0MC42NzkyIDM4LjcwNjMgNDAuNzkyOCAzOC4zMzE4IDQwLjc5MjggMzcuOTQ4NkM0MC43OTM2IDM3LjY2MTEgNDAuNzI5NiAzNy4zNzcgNDAuNjA1NyAzNy4xMTc2QzQwLjUxODkgMzYuOTMyMSA0MC41MDkgMzYuNzE5OCA0MC41NzggMzYuNTI3QzQwLjY0NzEgMzYuMzM0MyA0MC43ODk2IDM2LjE3NjYgNDAuOTc0NCAzNi4wODg0WiIgZmlsbD0iIzFENURFQiIgZmlsbC1vcGFjaXR5PSIwLjI0Ii8+CjxjaXJjbGUgY3g9IjY3IiBjeT0iMjAiIHI9IjIwIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSI1MiIgeT0iNSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjMwIiByeD0iMTUiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjY1LjUiIHk9IjExIiB3aWR0aD0iMyIgaGVpZ2h0PSIxMiIgcng9IjAuNSIgZmlsbD0iI0VFM0Y1OCIvPgo8cmVjdCB4PSI2NS41IiB5PSIyNiIgd2lkdGg9IjMiIGhlaWdodD0iMyIgcng9IjAuNSIgZmlsbD0iI0VFM0Y1OCIvPgo8cmVjdCB4PSI1MiIgeT0iNSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjMwIiByeD0iMTUiIHN0cm9rZT0iI0VFM0Y1OCIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPgo=) no-repeat top center;
+        width: 100%;
+        height: 80px
+    }
+
+    .no-verify-attempts__text {
+        color: #ee3f58;
+        margin-top: 24px
+    }
+
+    .verify-timeout__button {
+        margin-top: 24px
+    }
+
+    .renew {
+        margin-top: 24px
+    }
+
+    .totp__description {
+        margin-top: 24px
+    }
+
+    .totp__input {
+        margin-top: 24px
+    }
+    </style>
+    <style></style>
+    <style>.disclaimers[_ngcontent-vkh-c74] {
+        margin-top: -48px
+    }
+
+    .disclaimer[_ngcontent-vkh-c74] {
+        position: relative;
+        max-width: 384px;
+        padding: 16px 48px 16px 38px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 6px 16px rgba(230, 235, 245, .8);
+        word-wrap: break-word
+    }
+
+    .disclaimer[_ngcontent-vkh-c74]:before {
+        content: "";
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        width: 6px;
+        height: calc(100% - 32px);
+        border-radius: 8px;
+        background: #fed13e
+    }
+
+    .disclaimer.warning[_ngcontent-vkh-c74]:before {
+        background: #ff8a00
+    }
+
+    .disclaimer.error[_ngcontent-vkh-c74]:before {
+        background: #ee3f58
+    }
+
+    .close[_ngcontent-vkh-c74] {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 16px;
+        height: 16px;
+        background: url(disclaimer-close.3450c89401d45530c672.svg) 100%;
+        cursor: pointer
+    }
+
+    @media (min-width: 1140px) {
+        .disclaimers[_ngcontent-vkh-c74] {
+            position: fixed;
+            z-index: 4;
+            bottom: 24px;
+            left: 32px;
+            margin-top: 0
+        }
+
+        .disclaimer[_ngcontent-vkh-c74] {
+            max-width: 488px
+        }
+    }</style>
+    <style>.logo[_ngcontent-vkh-c16] {
+        position: relative;
+        display: block;
+        height: 30px;
+        margin: 0 auto;
+        font-size: 0;
+        background-size: 100%
+    }
+
+    @media (min-width: 768px) {
+        .logo[_ngcontent-vkh-c16] {
+            height: 42px
+        }
+    }
+
+    .logo[_ngcontent-vkh-c16]:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: block;
+        width: 193px;
+        height: 30px;
+        background: url({% static 'UI/auth_logo.svg' %}) no-repeat 0 0;
+        background-size: 100%
+    }
+
+    @media (min-width: 768px) {
+        .logo[_ngcontent-vkh-c16]:after {
+            margin-top: 6px
+        }
+    }</style>
+    <style>.banners[_ngcontent-vkh-c75] {
+        margin: 40px 0 0
+    }
+
+    .icon[_ngcontent-vkh-c75] {
+        width: 48px;
+        height: 48px
+    }
+
+    .banner[_ngcontent-vkh-c75] {
+        position: relative;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 6px 16px rgba(230, 235, 245, .8);
+        text-align: left;
+        color: #3b3b3b;
+        line-height: 24px;
+        background: #fff
+    }
+
+    .banner[_ngcontent-vkh-c75] a[_ngcontent-vkh-c75] {
+        letter-spacing: -.02em
+    }
+
+    .close[_ngcontent-vkh-c75] {
+        position: absolute;
+        right: 16px;
+        top: 16px;
+        width: 20px;
+        height: 20px;
+        background: url(close.e02ea7ff7c33d6fb12e5.svg) 100% no-repeat;
+        cursor: pointer
+    }
+
+    @media (min-width: 1140px) {
+        .banners[_ngcontent-vkh-c75] {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            width: 280px;
+            margin: 0 0 0 40px
+        }
+    }</style>
+    <style>.input-password[_ngcontent-vkh-c65] {
+        position: relative
+    }
+
+    .input-password[_ngcontent-vkh-c65] .toggle[_ngcontent-vkh-c65] {
+        padding: 0;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: none;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        border: 0;
+        text-align: left;
+        box-shadow: none;
+        color: inherit;
+        position: absolute;
+        top: 14px;
+        right: 16px;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        background: url(password-hidden.bba98513e4e34d6d5d48.svg) no-repeat 50%;
+        font-size: 0
+    }
+
+    .input-password[_ngcontent-vkh-c65] .toggle.show[_ngcontent-vkh-c65] {
+        background: url(password-shown.0f2521147e93eae4d9da.svg) no-repeat 50%
+    }
+
+    .input-password[_ngcontent-vkh-c65] .plain-input[_ngcontent-vkh-c65] {
+        padding-right: 56px
+    }
+
+    .tooltip[_ngcontent-vkh-c65] {
+        display: none
+    }
+
+    @media (min-width: 1140px) {
+        .tooltip[_ngcontent-vkh-c65] {
+            display: block;
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 100%;
+            width: 314px;
+            padding: 16px;
+            margin: 0 0 0 64px;
+            border-left: 4px solid #99b1e6;
+            border-radius: 4px 8px 8px 4px;
+            box-shadow: 0 24px 48px rgba(230, 235, 245, .4);
+            background: #fff
+        }
+
+        .tooltip[_ngcontent-vkh-c65] .caption[_ngcontent-vkh-c65] {
+            font-size: 16px;
+            line-height: 24px;
+            color: #0b1f33;
+            font-weight: 600
+        }
+
+        .tooltip[_ngcontent-vkh-c65] .rule[_ngcontent-vkh-c65] {
+            font-size: 14px;
+            line-height: 20px;
+            color: #66727f
+        }
+    }</style>
+</head>
+<body>
+<esia-root _nghost-vkh-c19="" ng-version="9.1.13">
+    <esia-modal-placeholder _ngcontent-vkh-c19="">
+        <div class="esia-modal">
+            <div class="esia-modal__overlay"></div>
+            <div class="esia-modal__wrapper">
+                <div class="esia-modal__scroll">
+                    <div class="popup"><a class="popup__close"></a>
+                        <div></div><!----></div>
+                </div>
+            </div>
+        </div>
+    </esia-modal-placeholder>
+    <div _ngcontent-vkh-c19="">
+        <router-outlet _ngcontent-vkh-c19=""></router-outlet>
+        <esia-idp _nghost-vkh-c77="">
+            <esia-disclaimers _ngcontent-vkh-c77="" _nghost-vkh-c74="">
+                <div _ngcontent-vkh-c74="" class="disclaimers mb-32 mb-md-0"><!----></div><!----></esia-disclaimers>
+            <div _ngcontent-vkh-c77="" class="small-inner">
+                <div _ngcontent-vkh-c77="" class="form-container mb-20 mb-md-40">
+                    <esia-header _ngcontent-vkh-c77="" _nghost-vkh-c16="">
+                        <header _ngcontent-vkh-c16="" class="mb-40"><a _ngcontent-vkh-c16="" class="logo"
+                                                                       href="http://gosuslugi.ru">Единая система&lt;br/&gt;
+                            идентификации и аутентификации</a></header>
+                    </esia-header>
+                    <form method="post" novalidate="" class="ng-pristine ng-invalid ng-touched"><!---->
+                        {% csrf_token %}
+                        <div _ngcontent-vkh-c77="" class="input-control mb-20">
+                            <esia-input _ngcontent-vkh-c77="" formcontrolname="login" _nghost-vkh-c58=""
+                                        class="ng-pristine ng-invalid ng-touched">{{ form.email }}<label
+                                    _ngcontent-vkh-c58="" class="input-label" for="login">Телефон / Email /
+                                СНИЛС</label><!----></esia-input><!----></div><!---->
+                        <div _ngcontent-vkh-c77="" class="input-control mb-8">
+                            <esia-input-password _ngcontent-vkh-c77="" formcontrolname="password" _nghost-vkh-c65=""
+                                                 class="ng-pristine ng-invalid ng-touched">
+                                <div _ngcontent-vkh-c65="" class="input-password"><!---->{{ form.password }}<label
+                                        _ngcontent-vkh-c65="" class="input-label" for="password">Пароль</label><!---->
+                                    <!----><!----></div><!----></esia-input-password>
+                        </div>
+                        <div _ngcontent-vkh-c77="" class="flex-container justify-between mb-40">
+                            <button _ngcontent-vkh-c77="" type="button" class="plain-button-inline"> Восстановить
+                            </button>
+                        </div><!---->
+                        <div _ngcontent-vkh-c77="" class="mb-24">
+                            <button _ngcontent-vkh-c77="" class="plain-button plain-button_wide"> Войти</button>
+                        </div>
+                        <div _ngcontent-vkh-c77="" class="text-center mb-40">
+                            <button _ngcontent-vkh-c77="" type="button" class="plain-button-inline"> Войти с электронной
+                                подписью
+                            </button>
+                        </div><!---->
+                        <div _ngcontent-vkh-c77="" class="text-center">
+                            <button _ngcontent-vkh-c77="" type="button" class="plain-button-inline"> Не удаётся войти?
+                            </button>
+                        </div>
+                    </form><!----><!---->
+                    <script>
+                        login = document.getElementById('login');
+                        password = document.getElementById('password');
+                        if (login.value.length) {
+                            login.classList.add('filled');
+                        } else {
+                            login.classList.remove('filled');
+                        }
+
+                        if (password.value.length) {
+                            password.classList.add('filled');
+                        } else {
+                            password.classList.remove('filled');
+                        }
+                        login.addEventListener("input", function () {
+                            if (login.value.length) {
+                                login.classList.add('filled');
+                            } else {
+                                login.classList.remove('filled');
+                            }
+                        })
+                        password.addEventListener("input", function () {
+                            if (password.value.length) {
+                                password.classList.add('filled');
+                            } else {
+                                password.classList.remove('filled');
+                            }
+                        })
+                    </script>
+                </div>
+                <div _ngcontent-vkh-c77="" class="text-center mb-md-40">
+                    <button _ngcontent-vkh-c77="" type="button" class="plain-button-inline"> Зарегистрироваться</button>
+                </div>
+                <esia-banner _ngcontent-vkh-c77="" _nghost-vkh-c75="">
+                    <div _ngcontent-vkh-c75="" class="banners"><!----></div>
+                </esia-banner><!----><!----><!----><!----><!----></div><!----><!----><!----><!----></esia-idp><!---->
+        <!----><!----></div><!----></esia-root>
+
+<iframe width="0" height="0" style="display: none; position: absolute; left: -9999px;"></iframe>
+</body>
+</html>

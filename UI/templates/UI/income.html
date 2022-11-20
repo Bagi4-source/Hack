@@ -1,0 +1,94 @@
+<figure class="highcharts-figure">
+    <div id="container"></div>
+</figure>
+{{ income_data |json_script:"income_data" }}
+{{ spending_data |json_script:"spending_data" }}
+<script>
+    income_data = [];
+    spending_data = []
+    data = JSON.parse(document.getElementById('income_data').textContent);
+    for (var i in data){
+        income_data.push({x: (new Date(i)).getTime(), y: data[i]});
+    }
+    data = JSON.parse(document.getElementById('spending_data').textContent);
+    for (var i in data){
+        spending_data.push({x: (new Date(i)).getTime(), y: data[i]});
+    }
+
+    Highcharts.chart('container', {
+        title: {
+            text: 'Финансы'
+        },
+        yAxis: {
+            title: {
+                text: ''
+            }
+        },
+
+        xAxis: {
+            type: 'datetime',
+        },
+        exporting: {enabled: false},
+
+
+        tooltip: {
+            borderRadius: 6,
+            style: {
+                color: "#333333",
+                cursor: "default",
+                fontSize: "14px",
+                whiteSpace: "nowrap"
+            },
+        },
+
+        series: [{
+            name: 'Доходы',
+            data: income_data,
+            type: 'areaspline',
+            color: "#3751FF",
+            marker: {
+                symbol: "circle",
+                enabled: false,
+            },
+            fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
+                },
+                stops: [
+                    [0, "#dde2ffbb"],
+                    [1, "#dde2ff00"]
+                ]
+            }
+        },
+            {
+                name: 'Расходы',
+                data: spending_data,
+                type: 'areaspline',
+                color: "#ffa023",
+                marker: {
+                    symbol: "circle",
+                    enabled: false,
+                },
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, "#ffa0234b"],
+                        [1, "#ffa02300"]
+                    ]
+                }
+            }
+        ]
+
+    });
+</script>
+
+</body>
+</html>

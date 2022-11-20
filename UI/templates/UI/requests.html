@@ -1,0 +1,12 @@
+<div class="item">
+    <div>#</div>
+    <div class="col" aria-label="Номер">Номер</div>
+    <div class="col" aria-label="Дата">Дата</div>
+</div>
+{% for request in requests %}
+    <div class="item">
+        <div>{{ forloop.counter }}</div>
+        <div class="col" aria-label="Номер">{{ request.car.number }}</div>
+        <div class="col" aria-label="Дата">{{ request.creation_date | date:"d-m-Y G:i" }}</div>
+    </div>
+{% endfor %}

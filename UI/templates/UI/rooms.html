@@ -1,0 +1,54 @@
+<div class="item item-title">
+    <div>#</div>
+    <div class="col">Заголовок</div>
+    <div class="col">Адрес</div>
+    <div class="col">Описание</div>
+    <div class="col">Стоимость</div>
+    <div class="col">Площадь</div>
+    <div class="col">Свободен</div>
+    <div class="col">Срок аренды</div>
+</div>
+{% for room in rooms %}
+
+    <div class="item">
+        <div>{{ forloop.counter }}</div>
+        <a href="../manage/room/{{ room.id }}">
+            <div class="col">{{ room.title }}</div>
+        </a>
+        <div class="col">{{ room }}</div>
+        <div class="col">{{ room.desc_part }}</div>
+        <div class="col">{{ room.price }}</div>
+        <div class="col">{{ room.square }} м²</div>
+        <div class="col">
+            {% if room.is_free %}
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_584_73)">
+                        <circle cx="10" cy="10" r="10" fill="#3751FF"/>
+                        <path d="M5 11L7.92929 13.9293C7.96834 13.9683 8.03166 13.9683 8.07071 13.9293L15 7"
+                              stroke="white" stroke-width="1.7" stroke-linecap="round"/>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_584_73">
+                            <rect width="20" height="20" fill="white"/>
+                        </clipPath>
+                    </defs>
+                </svg>
+
+            {% else %}
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_584_55)">
+                        <circle cx="10" cy="10" r="9" stroke="#C5C7CD" stroke-width="2"/>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_584_55">
+                            <rect width="20" height="20" fill="white"/>
+                        </clipPath>
+                    </defs>
+                </svg>
+
+            {% endif %}
+        </div>
+        <div class="col">{{ room.rent_end|date:"d-m-Y" }}</div>
+    </div>
+
+{% endfor %}

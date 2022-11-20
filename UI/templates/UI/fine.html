@@ -1,0 +1,20 @@
+<div class="item item-title">
+    <div>#</div>
+    <div class="col">Модель</div>
+    <div class="col">Гос. номер</div>
+    <div class="col">VIN</div>
+    <div class="col">Сумма штрафа</div>
+    <div class="col">Оплатить</div>
+</div>
+{% for car in cars %}
+    <div class="item">
+        <div>{{ forloop.counter }}</div>
+        <div class="col" aria-label="Модель">{{ car }}</div>
+        <div class="col" aria-label="Гос. номер">{{ car.number }}</div>
+        <div class="col" aria-label="VIN">{{ car.vin }}</div>
+        <div class="col" aria-label="Сумма штрафа">{{ car.fine }} <span>₽</span></div>
+        <div class="col" aria-label="Оплатить">
+            <a class="fine-btn info-block" style="color: var(--main-text-color) !important;" href="https://www.gosuslugi.ru/pay?tab=fine">Оплатить</a>
+        </div>
+    </div>
+{% endfor %}

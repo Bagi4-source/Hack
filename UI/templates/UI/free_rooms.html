@@ -1,0 +1,15 @@
+<div class="item item-title">
+    <div>#</div>
+    <div class="col">Заголовок</div>
+    <div class="col">Адрес</div>
+    <div class="col">Описание</div>
+    <div class="col">Стоимость</div>
+    <div class="col">Площадь</div>
+    <div class="col">Параметры</div>
+</div>
+{% for room in rooms %}
+    <div class="item">
+        <div>{{ forloop.counter }}</div>
+        <div class="col">{{ room }}</div>
+    </div>
+{% endfor %}
